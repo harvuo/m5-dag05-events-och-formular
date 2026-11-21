@@ -30,7 +30,14 @@ export function skapaRattKort(ratt: Ratt): HTMLElement {
 
   // DAG 5, TODO: skapa en knapp och lägg den sist i kortet:
   //   <button type="button" class="lagg-i-order" data-id="1" aria-label="Lägg Kardemummabulle i beställningen">Lägg i beställning</button>
-  kort.append(bild, rubrik, text, pris);
+  const knapp = document.createElement("button");
+  knapp.type = "button";
+  knapp.className = "lagg-i-order";
+  knapp.dataset.id = String(ratt.id);
+  knapp.setAttribute("aria-label", `Lägg ${ratt.namn} i beställningen`);
+  knapp.textContent = "Lägg i beställning";
+
+  kort.append(bild, rubrik, text, pris, knapp);
   return kort;
 }
 
@@ -65,6 +72,10 @@ export function markeraDagensRatt(container: HTMLElement, id: number): void {
 //     (priset = rättens pris gånger antal, formaterat med formateraPris; hittaRatt hittar rätten)
 //   - ref.tom (texten "Du har inte lagt något...") ska ha klassen "dold" när ordern INTE är tom
 //   - ref.summa.textContent = totalpriset (totalPris från meny.js), formaterat
-export function visaOrder(ref: OrderRef, order: OrderRad[], meny: Ratt[]): void {
+export function visaOrder(
+  ref: OrderRef,
+  order: OrderRad[],
+  meny: Ratt[],
+): void {
   // TODO
 }
