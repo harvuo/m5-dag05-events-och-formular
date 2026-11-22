@@ -77,5 +77,26 @@ export function visaOrder(
   order: OrderRad[],
   meny: Ratt[],
 ): void {
-  // TODO
+  ref.lista.replaceChildren();
+
+  for (const rad of order) {
+    const ratt = hittaRatt(meny, rad.id);
+    if (!ratt) {
+      continue;
+    }
+
+    const li = document.createElement("li");
+
+    const namnSpan = document.createElement("span");
+    namnSpan.textContent = `${rad.antal} × ${ratt.namn}`;
+
+    const prisSpan = document.createElement("span");
+    prisSpan.textContent = formateraPris(ratt.pris * rad.antal);
+
+    li.append(namnSpan, prisSpan);
+    ref.lista.appendChild(li);
+  }
+
+  ref.tom.classList.toggle("dold", order.length > 0);
+  ref.summa.textContent = formateraPris(totalPris(order, meny));
 }

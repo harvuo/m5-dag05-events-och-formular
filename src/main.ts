@@ -50,4 +50,15 @@ const orderRef = {
   summa: hamta("#order-summa"),
   tom: hamta("#order-tom"),
 };
-// TODO
+
+let order: OrderRad[] = [];
+
+kopplaLaggTill(lista, (id) => {
+  order = laggTillIOrder(order, id);
+  visaOrder(orderRef, order, meny);
+});
+
+hamta("#rensa-order").addEventListener("click", () => {
+  order = rensaOrder();
+  visaOrder(orderRef, order, meny);
+});
